@@ -1,25 +1,34 @@
-// src/pages/Register.tsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; 
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); 
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ name, email, password });
+
+    if (!name || !email || !password) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    console.log("Registration successful:", { name, email, password });
+
     setName("");
     setEmail("");
     setPassword("");
+
+    navigate("/product");
   };
 
   return (
-    <div className="min-h-screen bg-customBlack text-white flex flex-col">
-      <nav className="bg-RichBlack flex justify-between items-center p-[8px] pr-[80px] pb-[8px] pl-[80px] relative z-10">
+    <div className="min-h-screen bg-customBlack text-white flex flex-col overflow-hidden">
+      <nav className="relative bg-RichBlack flex justify-between items-center p-[8px] pr-[80px] pb-[8px] pl-[80px] h-[64px] z-10">
         <div className="flex items-center">
-          <img src="/img/icon.png" alt="Levitation Logo" className="ml-5 h-[71px] w-[71px] mr-2" />
+          <img src="/img/icon.png" alt="Levitation Logo" className="h-[71px] w-[71px] mr-2" />
           <div className="leading-tight">
             <span className="font-bold text-[20px] font-sans">levitation</span> <br />
             <span className="font-bold text-[10px] font-sans">infotech</span>
@@ -30,16 +39,12 @@ const Register: React.FC = () => {
         </Link>
       </nav>
 
-      <div className="flex flex-1 items-center justify-center mr-5">
+      <div className="flex flex-1 items-center justify-center mr-5 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 w-full p-6">
-          <div className="hidden md:block">
-            <img
-              src="/img/lev.png"
-              alt="Office Environment"
-              className="rounded-lg shadow-lg p-4 relative z-10"
-            />
+          <div className="hidden md:block relative z-10">
+            <img src="/img/lev.png" alt="Office Environment" className="rounded-lg p-4" />
           </div>
-          
+
           <div className="mr-28 py-14 mt-14">
             <h2 className="text-[40px] font-bold mb-2">Sign up to begin your journey</h2>
             <p className="text-[20px] mb-8 text-gray-400">
@@ -58,7 +63,7 @@ const Register: React.FC = () => {
                     required
                   />
                 </div>
-                <p className="text-[14px] text-gray-500 mt-1">
+                <p className="text-[14px] text-secondarycol mt-1">
                   This name will be displayed with your inquiry.
                 </p>
               </div>
@@ -75,7 +80,7 @@ const Register: React.FC = () => {
                     required
                   />
                 </div>
-                <p className="text-[14px] text-gray-500 mt-1">
+                <p className="text-[14px] text-secondarycol mt-1">
                   This email will be displayed with your inquiry.
                 </p>
               </div>
@@ -92,34 +97,30 @@ const Register: React.FC = () => {
                     required
                   />
                 </div>
-                <p className="text-[14px] text-gray-500 mt-1">
+                <p className="text-[14px] text-secondarycol mt-1">
                   Any further updates will be forwarded to this Email ID.
                 </p>
               </div>
 
+              <div className="flex items-center space-x-4">
               <button
                 type="submit"
-                className="px-6 bg-BlackLG py-2 rounded text-LimeGreen font-bold"
+                className="relative group px-6 py-2 bg-BlackLG rounded text-LimeGreen font-bold overflow-hidden transition-all duration-300 transform hover:scale-105"
               >
-                Register
+                <span className="relative z-10">Register</span>
+                <span className="absolute inset-0 bg-RichBlack transition-all duration-500 transform -translate-x-full group-hover:translate-x-0 z-0"></span>
               </button>
-
-              <p className="text-center text-gray-400 mt-4">
-                Already have an account? <Link to="/login" className="text-green-500">Login</Link>
+              <p className="text-secondarycol">
+                Already have an account?
               </p>
+            </div>
+
             </form>
           </div>
         </div>
-        <img
-          src="/img/Ellipse7.png"
-          alt="Ellipse Gradient"
-          className="absolute top-0 right-0 w-1/4"
-        />
-        <img
-          src="/img/Ellipse5.png"
-          alt="Ellipse Gradient"
-          className="absolute bottom-0 left-0 w-1/4 z-0"
-        />
+
+        <img src="/img/Ellipse7.png" alt="Ellipse Gradient" className="absolute top-0 -right-5 w-1/4" />
+        <img src="/img/Ellipse5.png" alt="Ellipse Gradient" className="absolute bottom-0 left-0 w-2/5 z-0 -mb-10 -ml-10" />
       </div>
     </div>
   );
